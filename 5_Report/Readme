@@ -1,7 +1,8 @@
 
 #  Flashing Of led's and Turing on and off of Burzzer
 
-The buttons have to be switched on before the app starts working. Potentiometer acts as temperature sensor. It gives signal which is converted by ADC and used to make a PWM signal pf corresponding duty cycle, as seen in the oscilloscope. As potentiometer is varied, message containing detected temperature is shown in serial monitor.
+The blinking LED circuit is like the electronics version of the “sound"program. It’s a simple electronic circuit that gives you a visual cue if it works.
+It was the first circuit I ever built, and it felt GREAT
 
 ## Folder Structure
 
