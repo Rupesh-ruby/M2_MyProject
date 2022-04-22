@@ -4,7 +4,7 @@
 
 * The blinking LED circuit is like the electronics version of the “Hello World”-program. It’s a simple electronic circuit that gives you a visual cue if it works. It was the first circuit I ever built, and it felt GREAT!
 
-** The goal is to make a Light Emitting Diode (LED) flashing and blink into buzzer sound.
+* The goal is to make a Light Emitting Diode (LED) flashing and blink into buzzer sound.
 
 # Appplication 
 
