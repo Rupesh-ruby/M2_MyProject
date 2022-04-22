@@ -41,7 +41,7 @@ It was the first circuit I ever built, and it felt GREAT
 
 
 
-## Low level test plan
+## Low level Requriments
 
 | **Test ID** | **Description**                                              | **Exp I/P** | **Exp O/P** | **Actual O/P** |**Type Of Test**  |    
 |-------------|--------------------------------------------------------------|------------|-------------|----------------|------------------|
