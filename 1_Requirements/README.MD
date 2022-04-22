@@ -21,7 +21,7 @@ Of course you can adjust the time interval but 1 second is pretty standard.
 
 # Components Needed
 
-* Atmega328
+* Atmega 328
 * LED(8)
 * Relay
 * 5 voltmeter
