@@ -1,0 +1,4 @@
+# DESIGN
+## Activity Diagram
+ * FLASHING LED - CASE1
+ * BUZZER SOUND -CASE 2
