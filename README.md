@@ -9,7 +9,5 @@
 # Code Grade
 ![code grade](https://api.codiga.io/project/32913/status/svg)
 
-# Codacy Badge
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/eeb206cff74047208401ca7ad23140c1)](https://www.codacy.com/gh/Rupesh-ruby/M2_Myproject/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Rupesh-ruby/M2_SeatHeatingSystem&amp;utm_campaign=Badge_Grade)
 
 
