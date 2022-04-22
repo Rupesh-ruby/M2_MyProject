@@ -1,4 +1,7 @@
-
+#include <mega328.h>
+#include <delay.h>
+#include <alcd.h>
+#include <stdio.h>
 #ifndef __AVR_ATmega32__
     #define __AVR_ATmega32__
 #endif
