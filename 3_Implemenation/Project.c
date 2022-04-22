@@ -1,82 +1,103 @@
-#include <mega328.h>
-#include <delay.h>
-#include <alcd.h>
-#include <stdio.h>
-#ifndef __AVR_ATmega32__
-    #define __AVR_ATmega32__
-#endif
-#include <avr/io.h>
-#define F_CPU 1000000
-#include <util/delay.h>
-#include <stdlib.h>
+            5
 
-#define enable            5
-#define registerselection 6
+/**
 
-void send_a_command(unsigned char command);
-void send_a_character(unsigned char character);
-void send_a_string(char *string_of_characters);
+ * @file Project.c
+
+ * @brief Project to detect the door is opened or not with the indication of LED glow and Buzzer sound that are connecte
+
+ */
+
+#include "project_config.h"
+
+#include "user_utils.h"
+
+#include "Door_detector.h"
+
+/**
+
+ * @brief Initialize all the Peripherals and pin configurations
+
+ * 
+
+ */
+
+void peripheral_init(void)
+
+{
+
+	/* Configure LED Pin */	DDRC=DDRC|0b01000000;
+
+  
+
+  /* Configure Buzzer Pin */
+
+  DDRD = 0xff;  
+
+  
+
+  /* Configure Door_sensor Pin */
+
+  DDRB=DDRB&0b11111101;
+
+}
+
+void change_led_state(uint8_t state)
+
+{
+
+	LED_PORT = (state << LED_PIN);
+
+  BUZZER_PORT = (state << BUZZER_PIN);
+
+}
+
+/**
+
+ * @brief Main function where the code execution starts
+
+ * 
+
+ * @return int Return 0 if the program completes successfully
+
+ * @note PORTC6 is in sink config. i.e when PORTB1 is in ON condition, the LED will turn ON
+
+ * @note PORTC6 is in sink config. i.e when PORTB1 is in OFF condition, the LED will turn OFF
+
+ * @note PORTD1 is in sink config. i.e when PORTB1 is in ON condition, the Buzzer will turn ON and produce the beep sound
+
+ * @note PORTD1 is in sink config. i.e when PORTB1 is in OFF condition, the Buzzer will turn OFF  
+
+ */
 
 int main(void)
-{
-    DDRB = 0xFF;
-    DDRA = 0;
-    DDRD = 0xFF;
-    _delay_ms(50);
-    
-    ADMUX |=(1<<REFS0)|(1<<REFS1);
-    ADCSRA |=(1<<ADEN)|(1<<ADATE)|(1<<ADPS0)|(1<<ADPS1)|(1<<ADPS2);
-    
-    int16_t COUNTA = 0;
-    char SHOWA [3];
-     
 
-    send_a_command(0x01); //Clear Screen 0x01 = 00000001
-    _delay_ms(50);
-    send_a_command(0x38);
-    _delay_ms(50);
-    send_a_command(0b00001111);
-    _delay_ms(50);
-    
-    ADCSRA |=(1<<ADSC);
-    while(1)
-    {
-        COUNTA = ADC/4;
-        send_a_string ("flah");
-        send_a_command(0x80 + 0x40 + 0);
-        send_a_string ("Temp(C)=");
-        send_a_command(0x80 + 0x40 + 8);
-        itoa(COUNTA,SHOWA,10);
-        send_a_string(SHOWA);
-        send_a_string ("      ");
-        send_a_command(0x80 + 0);
-        
-    }    
+{
+
+	/* Initialize Peripherals */
+
+	peripheral_init();
+
+	  while(1)
+
+  {
+
+if(PINB & 0b00000010)
+
+{
+
+  PORTC=PORTC|0b01000000;// Turn ON the LED connected to PORTC
+
+  PORTD = 0xff;        // Turn ON the Buzzer conneted to PORTD
+
 }
 
-void send_a_command(unsigned char command)
-{
-    PORTB = command;
-    PORTD &= ~ (1<<registerselection);
-    PORTD |= 1<<enable;
-    _delay_ms(20);
-    PORTD &= ~1<<enable;
-    PORTB = 0;
+else{
+
+    PORTC=PORTC&0b10111111;// Turn OFF the LED connected to PORTC
+
+    PORTD = 0x00;        // Turn OFF the Buzzer connected to PORTD
+
 }
 
-void send_a_character(unsigned char character)
-{
-    PORTB = character;
-    PORTD |= 1<<registerselection;
-    PORTD |= 1<<enable;
-    _delay_ms(20);
-    PORTD &= ~1<<enable;
-    PORTB = 0;
-}
-void send_a_string(char *string_of_characters)
-{
-    while(*string_of_characters > 0)
-    {
-        send_a_character(*string_of_characters++);
-    }
-}
+  }
