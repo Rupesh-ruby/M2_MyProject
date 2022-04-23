@@ -12,7 +12,8 @@
 
 #include "user_utils.h"
 
-#include "Door_detector.h"
+#include "detector.h"
+
 
 /**
 
@@ -26,7 +27,7 @@ void peripheral_init(void)
 
   
 
-  /* Configure Buzzer Pin */
+
 
   DDRD = 0xff;  
 
